@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Physical Computing Fall 2026</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700">
+<style>
+:root {
+  --green-900: #14301f;
+  --green-700: #1f5a38;
+  --green-500: #2e7d4f;
+  --green-300: #8fc4a1;
+  --green-100: #e4f1e8;
+  --green-50: #f4f8f5;
+  --ink: #1d2b22;
+  --muted: #4f6256;
+}
+body,h1,h2,h3,h4,h5 {
+  font-family: "Poppins", sans-serif
+  }
+body {
+  font-size:16px;
+  color: var(--ink);
+  background: var(--green-50);
+  }
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+  }
+h1 { 
+  font-size:30px;
+  color: var(--green-900);
+  }
+h2 {
+  font-size:25px;
+  color: var(--green-700);
+  }
+  h3 {
+  font-size:18px;
+  }
+img {
+  width: 100%;
+  height: 100%;
+}
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 8px 0;
+}
+.grid img {
+  /* same size the old 5-column happy.png (482x362) cells rendered at */
+  height: calc((100vw - 240px - 64px) / 5 * 0.751);
+  min-height: 120px;
+  width: auto !important;
+  max-width: 100%;
+  object-fit: contain;
+  cursor: pointer;
+}
+.w3-half img{
+  margin-bottom:-6px;
+  margin-top:16px;
+  opacity:0.8;
+  cursor:pointer
+  }
+.w3-half img:hover{
+  opacity:1
+  }
+
+.container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%;
+    /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+}
+.responsive-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+.write-up h3 {
+    font-size: 12px;
+    font-weight: 900;
+    margin-bottom: 4px;
+    color: var(--green-700);
+}
+.write-up h3 b {
+    font-weight: 900;
+}
+.write-up p {
+    font-size: 12px;
+    margin-top: 0;
+}
+
+/* Theme */
+.sidebar-green {
+    background: var(--green-900);
+    color: #e4f1e8;
+}
+.sidebar-green h3 {
+    color: #fff;
+}
+.sidebar-green a.w3-button {
+    color: #cfe6d7;
+}
+.sidebar-green a.w3-button:hover {
+    background: var(--green-500) !important;
+    color: #fff !important;
+}
+.accent {
+    color: var(--green-500);
+}
+hr {
+    border-color: var(--green-300) !important;
+}
+.w3-container > hr {
+    border-color: var(--green-500) !important;
+}
+.footer-green {
+    background: var(--green-900);
+    color: #cfe6d7;
+}
+.footer-green a {
+    color: var(--green-300);
+}
+#modal01 {
+    background-color: rgba(20, 48, 31, 0.92);
+}
+#caption {
+    color: #fff;
+}
+</style>
+<body>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar sidebar-green w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:200px;font-weight:bold;" id="mySidebar"><br>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-display-topleft" style="display:none;font-size:22px"></a>
+  <div class="w3-container">
+    <h3 class="w3-padding-64"><b>IXD<br>DESN 30146<br>Fall 2026</b></h3>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#Home" onclick="w3_close()" class="w3-bar-item w3-button">Home</a> 
+    <a href="#Module2" onclick="w3_close()" class="w3-bar-item w3-button">Module 2</a> 
+    <a href="#Workshop1" onclick="w3_close()" class="w3-bar-item w3-button">Workshop 1</a> 
+    <a href="#Workshop2" onclick="w3_close()" class="w3-bar-item w3-button">Workshop 2</a>
+    <a href="#Activity1" onclick="w3_close()" class="w3-bar-item w3-button">Activity 1</a> 
+    <a href="#Activity2" onclick="w3_close()" class="w3-bar-item w3-button">Activity 2</a>
+    <a href="#AdditionalResearch" onclick="w3_close()" class="w3-bar-item w3-button">Additional Research or Workshops</a>
+    <a href="#Project2" onclick="w3_close()" class="w3-bar-item w3-button">Project 2 Prototype</a> 
+  </div>
+</nav>
+
+<!-- Top menu on small screens
+<header class="w3-container w3-top w3-xlarge w3-padding">
+  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
+  <span>Menu</span>
+</header> -->
+
+<!-- 
+  if you want to link your image to a video use one of the following alt links as an example:
+
+  alt="test1Lorem ipsum dolor sit amet, consectetur adipiscing elit test1Lorem ipsum dolor sit amet, consectetur adipiscing elit <a href='https://www.youtube.com/embed/tgbNymZ7vqY' target='_blank'><p>Project Video Link</p></a>"> 
+  alt="test2Lorem ipsum dolor sit amet, consectetur adipiscing elit <div class='container'><iframe class='responsive-iframe' src='https://www.youtube.com/embed/tgbNymZ7vqY'></iframe></div>">
+
+-->
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:220px;margin-right:20px">
+
+  <!-- Header -->
+  <div class="w3-container" style="margin-top:80px" id="default">
+    <h1 class="w3-jumbo" id="Home"><b>Physical Computing</b></h1>
+    <h1 class="w3-xxxlarge accent"><b>Weekly Activity Template</b></h1>
+      <h1 class="w3-xxxlarge accent"><b>Mia Weber</b></h1>
+    <hr style="width:50px;border:5px solid grey" class="w3-round">
+  </div>
+  <!-- Boilerplate -->
+  <div id="Module2" class="w3-container" style="margin-top:75px">
+    <h1 class="w3-xxxlarge accent"><b>Module 2</b></h1>
+    <hr style="width:50px;border:5px solid grey" class="w3-round">
+    </h3>
+  </div>
+  
+  <!-- Project 1 Photo grid (modal) -->
+  <div id="Workshop1" >
+    <h2>Workshop 1 Geurilla Prototyping I</h2>
+    <div class="write-up">
+      <h3><b>Task:</b></h3>
+      <p>Create a phone stand based on a given video.</p>
+      <h3><b>Overview:</b></h3>
+      <p>I created a cardboard phone stand with 2 classmates, following the given video we selected a model shown which we created and reiterated to improve the final design.</p>
+      <h3><b>Challenge encountered:</b></h3>
+      <p>As we began making the refined prototype, we decided to use a single piece of cardboard for the sides and top panel of the model by folding the sides and glueing in place. But, as we did so it bunched up and looked very unappealing so we brainstormed a solution and came up with the idea to remove the majority of the material where the bends will occur to create a smooth surface. In the end, we were able to find an effective solution which removes the need to have exposed edges on the majority of the second prototype.</p>
+      <h3><b>Summary:</b></h3>
+      <p>Through completing this activity, I learned a new method for how to reduce visible seams when creating cardboard prototypes in addition to learning how to work efficiently with multiple people. After the activity began there was limited time to work on creating the prototype so we quickly took roles in order to complete the task in minimal time while also having a high quality outcome. I began by measuring the phone dimensions which Sofia imputed into the blueprint she made with all of the pieces we needed to up, throughout this time Rita collected materials. By selecting cardboard as a material I was able to apply the techniques I learned to my personal projects iterations. Furthermore, this group activity allowed me to better understand how to manipulate a key material I will use for my prototypes as well as developing my skills with tools.</p>
+    </div>
+    <div class="grid">
+      <img src="images/Workshop1/1.png" style="width:100%" onclick="onClick(this)" alt="test1Lorem ipsum dolor sit amet, consectetur adipiscing elit test1Lorem ipsum dolor sit amet, consectetur adipiscing elit <a href='https://www.youtube.com/embed/tgbNymZ7vqY' target='_blank'><p>Project Video Link</p></a>"> 
+      <img src="images/Workshop1/2.jpg" style="width:100%" onclick="onClick(this)" alt="test2Lorem ipsum dolor sit amet, consectetur adipiscing elit <div class='container'><iframe class='responsive-iframe' src='https://www.youtube.com/embed/tgbNymZ7vqY'></iframe></div>">
+      <img src="images/Workshop1/3.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/Workshop1/4.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/Workshop1/5.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/Workshop1/6.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+    </div>
+  </div>
+  
+  <div id="Workshop2" class="w3-row-padding">
+    <h2>Workshop 2 Geurilla Prototyping II</h2>
+    <div class="write-up">
+    <h3><b>Task:</b></h3>
+    <p>Brainstorm product ideas, receive feedback, and then create a prototype based on skills I learned from workshop 1.</p>
+    <h3><b>Overview:</b></h3>
+    <p>I began by roughly explaining and sketching 5 potential variations for my product and then had 4 people give input on which they prefer and believe would be best for my product. The winning version had no visible screen or lights indicating that the plant needed light or water with a mobile app covering this task. My prototype was made from an old cereal box based on a model of a sketch I drew, the material allowed for bending which cardboard is unable to do.</p>
+    <h3><b>Challenges encountered:</b></h3>
+    <p>Before this activity I had planned on creating a stereotypical round pot but as soon as I drew it out I was unsure how the sensor would work in this situation. To combat the risk of the sensor being in a position exposed to water I decided on making a hexagonal design which allows for the sensor to lay fully flush with the internal wall. Additionally, I had not originally accounted for the inner pot needing to be smaller, so part way through I had to peel apart the cardboard and slice it in order for there to be room for hardware at the base of the pot.</p>
+    <h3><b>Key Takeaways:</b></h3>
+    <p>In my future prototyping I now know that it will be mandatory to have the inner pot be not only smaller but also shorter than the outer walls in order to hide the hardware and keep it protected from soil and water. I will now also be focusing on creating movable parts so that the arduino and sensors are easily accessible in case they may need to be returned before the end of the project or need to be adjusted.</p>
+    </div>
+    <div class="grid">
+      <img src="images/Workshop2/1.jpg" style="width:100%" onclick="onClick(this)" alt="test2Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/Workshop2/2.jpg" style="width:100%" onclick="onClick(this)" alt="test3Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/Workshop2/3.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/Workshop2/4.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/Workshop2/5.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+    </div>
+  </div>
+  
+  <hr style="width:90%;border:5px solid grey;margin-top:80px" class="w3-round"></hr>
+
+  <div id="Activity1" >
+    <h2>Activity 1: My Research</h2>
+    <div class="write-up">
+      <h3><b>Task:</b></h3>
+      <p>Create a to-scale 3D model of my product with space for hardware components.</p>
+      <h3><b>Overview:</b></h3>
+      <p>Using Cinema 4D and skills I learned last year, I created a 2 part plant pot model with a secure detachable base containing a designated slot for the arduino cord and the pot with locations for sensors.</p>
+      <h3><b>Challenge encountered:</b></h3>
+      <p>During project 1 I had decided that the best method for creating the final product would be to create and print a 3D model, so for project 2 I explored possible model solutions. Last year we used Cinema 4D but as I went into the app I discovered that the licensing was expired and I could not find a free student version. But, after searching online, I was able to open a C4D file from After Effects which directed me through the software until I reached the free beta version included in Creative Cloud. This relieved stress because I was worried at first that I may have to learn a new software, which would likely impact the quality of the model because I would not be familiar with the tools.</p>
+      <h3><b>Key Takeaways:</b></h3>
+      <p>Through this activity I was able to set up software and reteach myself the necessary techniques to execute the final prototype. By having the software now readily available I will be able to model and print the pot and sensor holders easily without having to learn a new system. Currently, I have been making use of the boolean subtract tool to create spaces for the moisture and light sensors to be added and will likely be required to learn more tools. My next steps in project 2 will be to print a pot and refine it to efficiently meet the necessary requirements.</p>
+    </div>
+    <div class="grid">
+      <img src="images/Activity1/1.png" style="width:100%" onclick="onClick(this)" alt="test1Lorem ipsum dolor sit amet, consectetur adipiscing elit test1Lorem ipsum dolor sit amet, consectetur adipiscing elit <a href='https://www.youtube.com/embed/tgbNymZ7vqY' target='_blank'><p>Project Video Link</p></a>"> 
+      <img src="images/Activity1/2.jpg" style="width:100%" onclick="onClick(this)" alt="test2Lorem ipsum dolor sit amet, consectetur adipiscing elit <div class='container'><iframe class='responsive-iframe' src='https://www.youtube.com/embed/tgbNymZ7vqY'></iframe></div>">
+      <img src="images/Activity1/3.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/Activity1/4.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/Activity1/5.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+    </div>
+  </div>
+
+  <div id="Activity2" class="w3-row-padding">
+    <h2>Activity 2: My Research</h2>
+    <div class="write-up">
+      <h3><b>Task:</b></h3>
+      <p>Use the light sensor and multiple moisture sensors to explore which are best well suited for this project and how the code can detect the plants needs.</p>
+      <h3><b>Overview:</b></h3>
+      <p>Using the dual pronged moisture sensor, the solid black moisture sensor, and light sensor I experimented with using them individually and together in order to see how they work with code. The sensors were put in a variety of environments to survey how they collect and output data then were connected to code, then displayed warnings when conditions were not ideal.</p>
+      <h3><b>Challenge encountered:</b></h3>
+      <p>As I began my experimentation I had my mind made up that the solid black sensor would be best for the final model, as a result I solely focused on that sensor prior to this activity. As I investigated the ways that the sensors measured the moisture I came to the conclusion that it would be difficult to keep the top portions dry when in use. Next, I opened Arduino Uno and browsed through code templates created for different sensors, then I tested all of the sensors in at least 3 different conditions. I was unable to figure out how to understand the output so I turned to Claude, who directed me in creating code to display in the output panel when the individual light and moisture conditions were correct, too high, or too low.</p>
+      <h3><b>Key Takeaways:</b></h3>
+      <p>By experimenting with multiple types of sensors I discovered how my original selected sensor was too thick at the top to fit in my design. Despite manipulating it in a large variety of ways it always wanted to stick upwards, whereas the two prong option had fully manipulable wires. Overall, experimenting with the sensors not only directed me to choose the correct sensors but also how I can best place them in my prototypes.</p>
+    </div>
+    <div class="grid">
+      <img src="images/Activity2/1.jpg" style="width:100%" onclick="onClick(this)" alt="test2Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/Activity2/2.jpg" style="width:100%" onclick="onClick(this)" alt="test3Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/Activity2/3.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/Activity2/4.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/Activity2/5.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+    </div>
+  </div>
+
+  <hr style="width:90%;border:5px solid grey;margin-top:80px" class="w3-round"></hr>
+
+  <div id="AdditionalResearch" class="w3-row-padding">
+    <h2>Additional Research or Workshops(apis)</h2>
+    <div class="write-up">
+      <p>On top of prior research I explored possible API’s I could use to process the sensor input in order to manipulate the data into information that can be used to notify the user. PlantBook API offers a comprehensive list of house plants along with the light levels and soil moisture required for each species to thrive but, I encountered difficulty when testing the API. While PlantSolve API does not measure the soil moisture, the library still offers in depth plant care information and I was able to successfully fetch data from it in Hoppscotch. Then, to narrow down who my target audience is I looked through research studies and found that 54% of plant owners overwater their plants till they die and 30% of participants in the study blame lack of light for their plants death. I gathered that the primary pain point people encounter is knowing when to water in order to not drown the plant, rather than my prior idea that plant owners tend to underwater.</p>
+    </div>
+    <div class="grid">
+      <img src="images/AdditionalResearch/Stats 1.jpg" style="width:100%" onclick="onClick(this)" alt="test2Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/AdditionalResearch/stats 2.jpg" style="width:100%" onclick="onClick(this)" alt="test3Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/AdditionalResearch/API 1.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/AdditionalResearch/API 2.png" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/AdditionalResearch/happy.png" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+    </div>
+  </div>
+
+  <hr style="width:90%;border:5px solid grey;margin-top:80px" class="w3-round"></hr>
+  <!-- Boilerplate -->
+  <div id="Project2" class="w3-container" style="margin-top:75px">
+    <h1 class="w3-xxxlarge accent"><b>Project 2</b></h1>
+    <hr style="width:50px;border:5px solid grey" class="w3-round">
+    <h2>Project 2 Prototype</h2>
+    <p>PLACEHOLDER TEXT, put a description here or you will lose grades
+    </p>
+    <div class="grid">
+      <img src="images/final/1.jpg" style="width:100%" onclick="onClick(this)" alt="test2Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/final/2.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/final/3.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/final/4.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+      <img src="images/final/5.jpg" style="width:100%" onclick="onClick(this)" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+    </div>
+  </div>
+  
+   <!-- Modal for full size images on click-->
+   <div id="modal01" class="w3-modal" style="padding-top:0" onclick="this.style.display='none'">
+    <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
+    <div class="w3-modal-content w3-center w3-transparent" style ="padding:20px">
+      <img id="img01" class="w3-image">
+      <h2 id="caption"></h2>
+
+      <!-- <div id="urLink"></div> -->
+      <!-- <a id="urLink" class="container"><iframe class="responsive-iframe"></iframe></a> -->
+    <!-- </div> -->
+  </div>
+<!-- End page content -->
+</div>
+
+<!-- W3.CSS Container -->
+<div class="footer-green w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"><p class="w3-right">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p></div>
+
+<script>
+
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+
+  // var captionUrl = document.getElementById("urLink");
+  // captionUrl.innerHTML = element.url;
+
+  //document.getElementById("urLink").src = element.url;
+}
+</script>
+
+</body>
+</html>
